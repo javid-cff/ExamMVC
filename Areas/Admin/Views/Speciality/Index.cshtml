@@ -1,0 +1,33 @@
+﻿@model List<SpecialityVM>
+
+
+<div class="container">
+	<div class="row">
+        <h1>Specialities</h1>
+        <a asp-controller="Speciality" asp-action="Create" class="btn btn-success">Create new Speciality</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach(var item in Model)
+                {
+                    <tr>
+                        <th scope="row">@item.Id</th>
+                        <td>@item.Name</td>
+                        <td>
+                            <a asp-controller="Speciality" asp-action="Update" asp-route-id="@item.Id" class="btn btn-warning">🖊️</a>
+                            <a asp-controller="Speciality" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">🗑️</a>
+                        </td>
+                    </tr>
+                }
+                
+            </tbody>
+        </table>
+	</div>
+</div>

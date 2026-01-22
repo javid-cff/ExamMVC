@@ -1,0 +1,44 @@
+﻿@model DoctorUpdateVM
+
+<div class="container">
+    <div class="row">
+        <form asp-action="Update" method="post" enctype="multipart/form-data">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label>Name</label>
+                <input asp-for="Fullname" class="form-control" placeholder="fullname">
+                <span asp-validation-for="Fullname" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label>Email</label>
+                <input asp-for="Email" type="email" class="form-control" placeholder="email">
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input asp-for="PhoneNumber" type="tel" class="form-control" placeholder="phone number">
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label>Image</label>
+                <input asp-for="Image" class="form-control" placeholder="image">
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Example select</label>
+                <select asp-for="SpecialityId" class="form-control" id="exampleFormControlSelect1" asp-items="ViewBag.Specialities">
+                    <option value="" disabled selected hidden>--- Select Speciality ---</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a asp-controller="Doctor" asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>

@@ -1,21 +1,28 @@
 using System.Diagnostics;
+using System.Threading.Tasks;
+using ExamMVC.Contexts;
 using ExamMVC.Models;
+using ExamMVC.ViewModels.DoctorViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ExamMVC.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController(ILogger<HomeController> _logger, AppDbContext _context) : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        public async Task<IActionResult> Index()
         {
-            _logger = logger;
-        }
+            var doctors = await _context.Doctors.Select(x => new DoctorGetVM()
+            {
+                Id = x.Id,
+                Fullname = x.Fullname,
+                Email = x.Email,
+                PhoneNumber = x.PhoneNumber,
+                ImagePath = x.ImagePath,
+                SpecialityName = x.Speciality.Name
+            }).ToListAsync();
 
-        public IActionResult Index()
-        {
-            return View();
+            return View(doctors);
         }
 
         public IActionResult Privacy()
